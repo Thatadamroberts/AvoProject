@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View,Picker} from 'react-native';
+import {Platform, StyleSheet, Text, View,Picker, Image} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -27,24 +27,24 @@ export default class App extends Component<Props> {
       };
       this.onChange = this.onChange.bind(this);
   }
-  updateProperty = (Property) => {
-  this.setState({ Property: Property })
-  this.state.GiveUp = (this.state.Property.value / this.state.Country.value)
+  onChange(state) {
+      this.setState(state);
   }
-  updateCountry = (Country) => {
-  this.setState({ Country: Country })
-  this.state.GiveUp = (this.state.Property.value / this.state.Country.value)
-  }
+
   render() {
     return (
       <View style={styles.container}>
+      <Image
+                style={{width: 300, height: 200}}
+                source={require('./Resources/images/Avo.gif')}
+              />
         <Text style={styles.welcome}>Welcome to Avohouse</Text>
         <Text style={styles.instructions}>How many Avocados must you give up for a house?</Text>
         <Text style={styles.instructions}>Which Country?</Text>
         <Picker
             selectedValue={this.state.Country}
           style={{ height: 70, width: 250 }}
-          onValueChange={(itemValue,itemIndex) => setState(Country : itemValue)}>
+          onValueChange={(itemValue,itemIndex) => this.setState({Country : itemValue})}>
           <Picker.Item label="USA" value=".75" />
           <Picker.Item label="UK" value="1" />
         </Picker>
@@ -52,11 +52,14 @@ export default class App extends Component<Props> {
         <Picker
         selectedValue={this.state.Property}
           style={{ height: 70, width: 250 }}
-          onValueChange={(itemValue,itemIndex) => setState(Property : itemValue)}>
+          onValueChange={(itemValue,itemIndex) => this.setState({Property : itemValue})}>
           <Picker.Item label="House" value="250000" />
           <Picker.Item label="Flat" value="175000" />
         </Picker>
-        <Text>{this.state.Country * this.state.Property}</Text>
+        <Text>An avocado costs: {this.state.Country}</Text>
+        <Text>Average property cost is: {this.state.Property}</Text>
+        <Text>You need to give up {this.state.Country * this.state.Property} Avocados</Text>
+        <Text>Give up {(this.state.Country * this.state.Property) / 9125} per day for 25 years!</Text>
       </View>
     );
   }
