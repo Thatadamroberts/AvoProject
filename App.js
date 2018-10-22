@@ -18,10 +18,14 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-  state = {
-  Country : 0,
-  Property : 0,
-  GiveUp : 0
+  constructor(){
+      super();
+      this.state={
+          Country : '',
+          Property : '',
+          GiveUp : ''
+      };
+      this.onChange = this.onChange.bind(this);
   }
   updateProperty = (Property) => {
   this.setState({ Property: Property })
@@ -40,7 +44,7 @@ export default class App extends Component<Props> {
         <Picker
             selectedValue={this.state.Country}
           style={{ height: 70, width: 250 }}
-          onValueChange={this.updateCountry}>
+          onValueChange={(itemValue,itemIndex) => setState(Country : itemValue)}>
           <Picker.Item label="USA" value=".75" />
           <Picker.Item label="UK" value="1" />
         </Picker>
@@ -48,11 +52,11 @@ export default class App extends Component<Props> {
         <Picker
         selectedValue={this.state.Property}
           style={{ height: 70, width: 250 }}
-          onValueChange={this.updateProperty}>
+          onValueChange={(itemValue,itemIndex) => setState(Property : itemValue)}>
           <Picker.Item label="House" value="250000" />
           <Picker.Item label="Flat" value="175000" />
         </Picker>
-        <Text>{this.state.GiveUp}</Text>
+        <Text>{this.state.Country * this.state.Property}</Text>
       </View>
     );
   }
