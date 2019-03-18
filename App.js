@@ -58,8 +58,8 @@ export default class App extends Component<Props> {
         </Picker>
         <Text>An avocado costs: {this.state.Country}</Text>
         <Text>Average property cost is: {this.state.Property}</Text>
-        <Text>You need to give up {this.state.Country * this.state.Property} Avocados</Text>
-        <Text>Give up {(this.state.Country * this.state.Property) / 9125} per day for 25 years!</Text>
+        <Text>You need to give up {this.state.Property / this.state.Country} Avocados</Text>
+        <Text>Give up {(this.state.Property / this.state.Country) / 9125} per day for 25 years!</Text>
       </View>
     );
   }
